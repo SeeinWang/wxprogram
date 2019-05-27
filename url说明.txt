@@ -1,0 +1,16 @@
+url:
+connect.php -> 把需要联系的客户的个人信息加入到数据库questioner中的Guests table 中
+
+login.php -> 顾问登录查询客户个人信息后台数据(逻辑）
+
+login.html -> 顾问登录查询客户个人信息后台数据(界面）入口文件
+
+customerData -> 登录后跳转看到客户个人信息
+
+pushOrder-> 把用户订单加入到数据库中
+
+getOrderList -> 获取用户数据库中的订单分类返回
+
+getPlaceOrder -> 返回用户已经下单但是未付款的某个订单
+
+index.html -> 首页（还没想好怎么用）
