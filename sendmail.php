@@ -1,57 +1,93 @@
 <?php
-$visitor_email = $_POST['email'];
-$name=$_POST['name'];
-$sex=$_POST['sex'];
-$birthday=$_POST['birthday'];
-$birthcity=$_POST['birthcity'];
-$nationality=$_POST['nationality'];
-$zipcode=$_POST['zipcode'];
-$tel=$_POST['tel'];
-$wxnumber=$_POST['wxnumber'];
-$city=$_POST['city'];
-$price = $_POST['price'];
-$title = $_POST['title'];
-$sex = $_POST['sex'];
-$city = $_POST['city'];
+$orderId =$_POST['orderId'];
+$visitor_email =$_POST['email'];
+$name =$_POST['name'];
+$tel =$_POST['tel'];
 
 
+$servername = "localhost";
+$username = "root";
+$password = "@Guangson#2019";
+$dbname ="order";
+ 
+// 创建连接
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
+// Check connection
 
-echo $title;
-
-if($sex == 0){
-  $Se = "男";
-  }
-  else{
-    $Se ="女";
-  }
-
-
-if($city == 0){
-  $cit = "中国";
-  }
-  else{
-  $cit ="加拿大";
-  }
-// 生成随机数
-function order($name){
- $tel = rand(1000,10000);
- return $name.strval($tel);
+if (!$conn) {
+    die("连接失败: " . mysqli_connect_error());
 }
 
 
-// 生成订单号
 
-$orderNumber = order($name);
+mysqli_set_charset($conn,"utf8");
 
-// 生成现在时间戳
+//获得productName 
+$sql = "SELECT productName FROM paid_order where orderId = $orderId";
 
-function createDate(){
-$date = date("Y-m-d H:i");
-return $date;
+$result = mysqli_query($conn, $sql);
+ 
+if (mysqli_num_rows($result) > 0) {
+    // 
+while($row = mysqli_fetch_assoc($result)) {
+        $productName=$row["productName"];
+echo "productName success"; 
+    }
+} else {
+    echo "productName fail";
 }
 
-$orderDate = createDate();
+//获得productPice
+$sql = "SELECT productPice FROM paid_order where orderId = $orderId";
+
+$result = mysqli_query($conn, $sql);
+ 
+if (mysqli_num_rows($result) > 0) {
+    // 
+while($row = mysqli_fetch_assoc($result)) {
+        $productPice=$row["productPice"];
+echo "productPice success"; 
+    }
+} else {
+    echo "productPice fail";
+}
+
+
+//获得订单确认号
+$sql = "SELECT confirmNumber FROM paid_order where orderId = $orderId";
+
+$result = mysqli_query($conn, $sql);
+ 
+if (mysqli_num_rows($result) > 0) {
+    // 
+while($row = mysqli_fetch_assoc($result)) {
+        $confirmNumber=$row["confirmNumber"];
+echo "confirmNumber success"; 
+    }
+} else {
+    echo "confirmNumber fail";
+}
+
+// 获得时间戳
+$sql = "SELECT orderDate FROM customer_info where confirmNumber = '$confirmNumber'";
+
+$result = mysqli_query($conn, $sql);
+ 
+if (mysqli_num_rows($result) > 0) {
+    // 
+while($row = mysqli_fetch_assoc($result)) {
+        $orderDate=$row["orderDate"];
+echo "orderDate success"; 
+    }
+} else {
+    echo "orderDate fail";
+}
+
+
+
+
+
 
 //Validate first
 if(empty($visitor_email)) 
@@ -74,9 +110,9 @@ $htmlContent = "<html>
                src = 'http://guangson.com/Content/images/logo.png'>
        </div>         
         <p>您好".$name.":</p>
-        <p style='font-size:18px;'>感谢您购买的我们的服务 ".$title." 价格是".$price."rmb,您的订单号是".$orderNumber."</p>
+        <p style='font-size:18px;'>感谢您购买的我们的服务 ".$productName." 价格是".$productPice."rmb,您的订单号是".$confirmNumber."</p>
         <p style='font-size:18px;'>请您核对下列基本信息，如果需要修改或者有问题，请联系我们。</p>
-        <p style='font-size:18px;'>Order # : ".$orderNumber."</p>
+        <p style='font-size:18px;'>Order # : ".$confirmNumber."</p>
         <p style='font-size:18px;'>Order Date: ".$orderDate."</p>
                        
         <table style='border:1px solid black; font-size:18px; width:60%;min-height: 30px; 
@@ -89,49 +125,21 @@ $htmlContent = "<html>
         <td style='border:1px solid black;'>姓名</td>
         <td style='border:1px solid black;'>".$name."</td>
         </tr>
-        <tr>
-        <td style='border:1px solid black;'>性别</td>
-        <td style='border:1px solid black;'>".$Se."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>生日</td>
-        <td style='border:1px solid black;'>".$birthday."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>出生地</td>
-        <td style='border:1px solid black;'>".$birthcity."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>国籍</td>
-        <td style='border:1px solid black;'>".$nationality."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>邮编</td>
-        <td style='border:1px solid black;'>".$zipcode."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>电话</td>
-        <td style='border:1px solid black;'>".$tel."</td>
-        </tr>
-        <tr>
-        <td style='border:1px solid black;'>微信号码</td>
-        <td style='border:1px solid black;'>".$wxnumber."</td>
-        </tr>
-        <tr>
+         <tr>
         <td style='border:1px solid black;'>电子邮箱</td>
         <td style='border:1px solid black;'>".$visitor_email."</td>
         </tr>
 
         <tr>
-        <td style='border:1px solid black;'>所在地</td>
-        <td style='border:1px solid black;'>".$cit."</td>
+        <td style='border:1px solid black;'>电话</td>
+        <td style='border:1px solid black;'>".$tel."</td>
         </tr>
 
         
         </table>
       <div style='color:blue'>
                      <p>后续步骤：</p>
-                     <p>请您下载附件，根据您自身情况填写后直接回复到发件邮箱，如有疑问，请联系我们。</p>
+                     <p>我们将会尽快与您联系，补全服务所需资料。</p>
        </div>
         <div style='padding-left:5px;padding-top: 20px;padding-right:300px; width:600px'>
               <p style='font-weight:bold;'>关于我们：</p>
@@ -158,7 +166,7 @@ $htmlContent = "<html>
        </div>
 </body></html>";
 
-$file = "/var/www/html/checklist.docx";
+$file = "";
     
 $to = $visitor_email;//<== update the email address
 

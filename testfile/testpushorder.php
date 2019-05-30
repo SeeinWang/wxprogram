@@ -1,14 +1,12 @@
 <?php
 
+
 $openId =$_POST['openId'];
 $orderId = $_POST['orderId'];
 $productName = $_POST['productName'];
 $orderNumber = $_POST['orderNumber'];
 $price= $_POST['price'];
 $productNumber= $_POST['productNumber'];
-
-
-
 
 $servername = "localhost";
 $username = "root";
@@ -23,8 +21,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
     die("Á¬½ÓÊ§°Ü: " . mysqli_connect_error());
 }
-
-
 
 mysqli_set_charset($conn,"utf8");
 
@@ -42,16 +38,14 @@ echo "img success";
     echo "fail";
 }
 
-$sql = "INSERT INTO unpaid_order(openId, orderId, productName, productPice, orderNumber, productimg, productNumber) 
+$sql = "INSERT INTO `unpaid_order`(`openId`, `orderId`, `productName`, `productPice`, `orderNumber`, `productimg`, `productNumber`) 
 VALUES ('$openId','$orderId','$productName','$price','$orderNumber','$productimg','$productNumber')";
-
-$res=array($openId,$orderId,$productNumber,$orderNumber,$price,$productNumber);
 
 if(mysqli_query($conn,$sql)){
     echo 'success';
 
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn). json_encode($res);
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
  
 mysqli_close($conn);

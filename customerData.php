@@ -56,6 +56,6 @@ while($row = mysqli_fetch_array($data)){
 $conn = null;
 
 echo "</table>";
-echo "<a href='http://192.234.204.46/customerData.php'><button style='margin-top:30px'>Refresh</button></a>";
-echo "<a href='login.php?action=logout'><button style='margin-left:30px'>Logout</button></a>";
+echo "<a href='http://192.234.204.46/wxprogram/customerData.php'><button style='margin-top:30px'>Refresh</button></a>";
+echo "<a href='migrateUserLogin.php?action=logout'><button style='margin-left:30px'>Logout</button></a>";
 ?>
