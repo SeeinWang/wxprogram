@@ -48,34 +48,128 @@ if(!isset($_SESSION['user_id'])){
 ?>
 
 <html>
-  <head>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style type="text/css">
+#LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+
+.form-heading { color:#fff; font-size:23px; margin-top:50px}
+.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
+.panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
+
+.login-form .form-control {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+}
+.login-form{
+ margin-top:100px;
+}
+.main-div {
+  background: #ffffff none repeat scroll 0 0;
+  border-radius: 2px;
+  margin: 10px auto 30px;
+  max-width: 38%;
+  padding: 50px 71px 70px 71px;
+}
+
+.login-form {
+  margin-bottom:50px;
+}
+
+.form-group {
+
+margin-bottom:10px;
+
+}
+.login-form{ text-align:center;}
+
+.forgot a {
+  color: #777777;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.login-form  .btn.btn-primary {
+  background: #f0ad4e none repeat scroll 0 0;
+  border-color: #f0ad4e;
+  color: #ffffff;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+}
+.forgot {
+  text-align: left; margin-bottom:30px;
+}
+.botto-text {
+  color: #ffffff;
+  font-size: 14px;
+  margin: auto;
+}
+.login-form .btn.btn-primary.reset {
+  background: #ff9900 none repeat scroll 0 0;
+}
+.back { text-align: left; margin-top:10px;}
+.back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+</style>
+
+ 
     <title>Log In</title>
       </head>
-  <body>
-    <h3>Guangson Order Data Access Center</h3>
+  <body id="LoginForm">
+  <div class ="container">
+     <h1 class="text-center form-heading">Guangson Order Data Access Center</h1>
+
     <!--通过$_SESSION['user_id']进行判断，如果用户未登录，则显示登录表单，让用户输入用户名和密码-->
     <?php
     if(!isset($_SESSION['user_id'])){
       echo '<p class="error">'.$error_msg.'</p>';
     ?>
     <!-- $_SERVER['PHP_SELF']代表用户提交表单时，调用自身php文件 -->
-    <form method = "post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-      <fieldset>
-        <legend>Migration Apartment User Log In</legend>
+    <div class ="login-form">
+    <div class="main-div">
+    <div class ="panel">
+    <h2>Education Admin Login</h2>
+    <p>Please enter your username and password</p>
+    </div>
+    <form id="Login" method = "post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+      
+        <div class ="form-group">
   
-        <label for="username">Username:</label>
+        
         <!-- 如果用户已输过用户名，则回显用户名 -->
-        <input style="margin-top:10px" type="text" id="username" name="username"
+        <input  type="text" class="form-control" id="username" name="username" placeholder="username"
         value="<?php if(!empty($user_username)) echo $user_username; ?>" />
   
-        <br/>
+        </div>
   
-        <label style="margin-top:20px;margin-left:2px" for="password">Password:</label>
-        <input style="margin-top:20px;margin-left:2px" type="password" id="password" name="password"/>
+        <div class="form-group">
+
+        <input class="form-control" type="password" id="password" placeholder="password" name="password"/>
+        
+        </div>
   
-      </fieldset>
-      <input style="margin-top:30px;" type="submit" value="Log In" name="submit"/>
+      
+       <input class="btn btn-primary" type="submit" value="Log In" name="submit"/>
     </form>
+</div>
+</div>
+</div>
+</div>
     <?php
     }
     ?>
