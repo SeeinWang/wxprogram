@@ -7,7 +7,7 @@ echo "<p> Guangson Wechat Program Customer Information Data Collection</p>";
 
 echo "<table style='border: solid 1px black;'>";
 
-echo "<tr><th>Username</th><th>Useremail</th><th>Usertel</th><th>Wxnumber</th><th>Questioned Type</th><th>Operation</th></tr>";
+echo "<tr><th>Username</th><th>Useremail</th><th>Usertel</th><th>Wxnumber</th><th>Questioned Type</th><th>Date</th><th>Operation</th></tr>";
 
  
 $servername = "localhost";
@@ -34,7 +34,7 @@ if ($conn->query($sql) === TRUE) {
 }
      
 
-$query = "SELECT * FROM Guests";
+$query = "SELECT * FROM Guests order by date Desc";
 $data = mysqli_query($dbc,$query); 
 
 
@@ -45,7 +45,10 @@ while($row = mysqli_fetch_array($data)){
     echo '<td style="width:150px;border:1px solid black;">'.$row['email'].'</td>'; 
     echo '<td style="width:150px;border:1px solid black;">'.$row['tel'].'</td>'; 
     echo '<td style="width:150px;border:1px solid black;">'.$row['wxnumber'].'</td>'; 
-    echo '<td style="width:150px;border:1px solid black;">'.$row['type'].'</td>'; 
+    echo '<td style="width:150px;border:1px solid black;">'.$row['type'].'</td>';
+    echo '<td style="width:150px;border:1px solid black;">'.$row['date'].'</td>'; 
+ 
+    
     //点击"删除"链接，调用自身页面，同时在页面链接上增加‘DelID’变量，赋值为该记录在数据库中的username，用于GET方式获得 
     echo '<td style="width:150px;border:1px solid black;"><a href = "'.$_SERVER['PHP_SELF'].'?DelUsername='.$row['username'].'">Delete</a></td>'; 
    echo '</tr>'; 

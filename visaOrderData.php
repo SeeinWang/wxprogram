@@ -1,7 +1,8 @@
 <?php
 header("content-type:text/html;charset=utf-8");  
 
-echo  "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+echo  "<meta charset='utf-8'> 
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
 echo "<p> Guangson Wechat Program Order Information Data Collection</p>";
 
@@ -19,9 +20,10 @@ $dbname = "order";
 
 $dbc = mysqli_connect($servername,$username,$password,$dbname);
 
-     
+$query = "SELECT * FROM customer_info order by orderDate DESC";
 
-$query = "SELECT * FROM customer_info";
+mysqli_set_charset($dbc,"utf8");
+
 $data = mysqli_query($dbc,$query); 
 
 

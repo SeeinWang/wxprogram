@@ -216,6 +216,15 @@ $returnpath = "-f" . $from;
 //send email
 $mail = @mail($to, $email_subject, $message, $headers, $returnpath); 
 
+$to = 'moyecheng@guangson.com';
+
+$mail = @mail($to, $email_subject, $message, $headers, $returnpath); 
+
+$to ='daisyhuang@guangson.com';
+
+$mail = @mail($to, $email_subject, $message, $headers, $returnpath); 
+
+
 
 
 
