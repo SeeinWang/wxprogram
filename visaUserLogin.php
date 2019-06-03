@@ -5,7 +5,6 @@ require_once 'connectvarsvisa.php';
 session_start();
 ini_set('session.gc_maxlifetime', "60");
 $error_msg = "";
-
 if($_GET['action'] == "logout"){
     unset($_SESSION['user_id']);
     unset($_SESSION['username']);
@@ -16,9 +15,7 @@ if($_GET['action'] == "logout"){
 //如果用户未登录，即未设置$_SESSION['user_id']时，执行以下代码
 if(!isset($_SESSION['user_id'])){
   if(isset($_POST['submit'])){//用户提交登录表单时执行如下代码
-
     $dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-
     $user_username = trim($_POST['username']);
     $user_password = trim($_POST['password']);
   
@@ -32,7 +29,8 @@ if(!isset($_SESSION['user_id'])){
         $row = mysqli_fetch_array($data);
         $_SESSION['user_id']=$row['user_id'];
         $_SESSION['username']=$row['username'];
-        $home_url = 'visaOrderData.php';
+        $user = $_SESSION['username'];
+        $home_url = 'visaOrderData.php?user='.$user.'';
         header('Location: '.$home_url);
       }else{//若查到的记录不对，则设置错误信息
         $error_msg = 'Sorry, you must enter a valid username and password to log in.';
@@ -61,11 +59,9 @@ if(!isset($_SESSION['user_id'])){
 
 <style type="text/css">
 #LoginForm{ background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
-
 .form-heading { color:#fff; font-size:32px; margin-top:50px}
 .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
 .panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
-
 .login-form .form-control {
   background: #f7f7f7 none repeat scroll 0 0;
   border: 1px solid #d4d4d4;
@@ -84,18 +80,13 @@ if(!isset($_SESSION['user_id'])){
   max-width: 38%;
   padding: 50px 71px 70px 71px;
 }
-
 .login-form {
   margin-bottom:50px;
 }
-
 .form-group {
-
 margin-bottom:10px;
-
 }
 .login-form{ text-align:center;}
-
 .forgot a {
   color: #777777;
   font-size: 14px;
@@ -124,7 +115,6 @@ margin-bottom:10px;
 }
 .back { text-align: left; margin-top:10px;}
 .back a {color: #444444; font-size: 13px;text-decoration: none;}
-
 </style>
 
  
