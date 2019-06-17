@@ -224,6 +224,11 @@ $to ='daisyhuang@guangson.com';
 
 $mail = @mail($to, $email_subject, $message, $headers, $returnpath); 
 
+$to ='accounting@guangson.com';
+
+$mail = @mail($to, $email_subject, $message, $headers, $returnpath); 
+
+
 
 
 

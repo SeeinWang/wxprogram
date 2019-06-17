@@ -5,8 +5,6 @@ echo  "<meta charset='utf-8'>
  
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>";
 
-
-
 echo "<p> Guangson Wechat Program Order Information Data Collection</p>";
 
 echo "<table style='border: solid 1px black;'>";
@@ -21,19 +19,17 @@ $dbname = "order";
 
 echo "Search by order status:";
 
-echo "<a href='visaOrderData.php'><button style='margin-left:30px;margin-bottom:20px' onclick='this.style.color='red''>All Orders</button></a>";
-echo "<a href='PaidOrder.php'><button style='margin-left:30px;margin-bottom:20px'>Paid Orders</button></a>";
-echo "<a href='AssignedOrder.php'><button style='margin-left:20px;margin-bottom:20px'>Assigned Orders</button></a>";
-echo "<a href='ProcessingOrder.php'><button style='margin-left:20px;margin-bottom:20px'>Processing Orders</button></a>";
-echo "<a href='CompletedOrder.php'><button style='margin-left:20px;margin-bottom:20px'>Completed Orders</button></a></br>";
+echo "<a href='http://192.234.204.46/wxprogram/visaOrderData.php'><button style='margin-left:30px;margin-bottom:20px'>All Orders</button></a>";
 
 
-
+echo "<a href='http://192.234.204.46/wxprogram/PaidOrder.php'><button style='margin-left:30px;margin-bottom:20px;color:red;'>Paid Orders</button></a>";
+echo "<a href='http://192.234.204.46/wxprogram/AssignedOrder.php'><button style='margin-left:20px;margin-bottom:20px; '>Assigned Orders</button></a>";
+echo "<a href='http://192.234.204.46/wxprogram/ProcessingOrder.php'><button style='margin-left:20px;margin-bottom:20px'>Processing Orders</button></a>";
+echo "<a href='http://192.234.204.46/wxprogram/CompletedOrder.php'><button style='margin-left:20px;margin-bottom:20px'>Completed Orders</button></a></br>";
 
 echo "Search by job assigned to teams";
 echo "<a href='visaMemberOrderData.php?user=teamOne'><button style='margin-left:30px;margin-bottom:20px'>Team One Orders</button></a>";
 echo "<a href='visaMemberOrderData.php?user=teamTwo'><button style='margin-left:20px;margin-bottom:20px'>Team Two Orders</button></a> </br>";
-
 
 
 
@@ -83,7 +79,7 @@ if ($conn->query($sql) === TRUE) {
 
 $dbc = mysqli_connect($servername,$username,$password,$dbname);
 
-$query = "SELECT * FROM customer_info  order by orderDate DESC";
+$query = "SELECT * FROM customer_info where status ='Paid'";
 
 mysqli_set_charset($dbc,"utf8");
 
@@ -145,6 +141,6 @@ echo '</tr>';
 $conn = null;
 
 echo "</table>";
-echo "<a href='http://192.234.204.46/wxprogram/visaOrderData.php'><button style='margin-top:30px'>Refresh</button></a>";
+echo "<a href='http://192.234.204.46/wxprogram/PaidOrder.php'><button style='margin-top:30px'>Refresh</button></a>";
 echo "<a href='visaUserLogin.php?action=logout'><button style='margin-left:30px'>Logout</button></a>";
 ?>

@@ -28,7 +28,7 @@ if (!$conn) {
 mysqli_set_charset($conn,"utf8");
 
  
-$sql = "SELECT Url FROM imgUrl where productNumber =50 ";
+$sql = "SELECT Url FROM imgUrl where productNumber = $productNumber ";
 $result = mysqli_query($conn, $sql);
  
 if (mysqli_num_rows($result) > 0) {
